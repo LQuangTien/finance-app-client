@@ -1,18 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import moment from "moment";
-import { Button, Form, Input } from "antd";
 
 import BarExpend from "components/BarExpend";
-import { CreditCard, MoneyForm, Wrapper } from "./style.jsx";
+import { Wrapper } from "./style.jsx";
 
-function BarExpendPage(props) {
+function BarExpendPage() {
   const [chartData, setChartData] = useState(null);
   const [isMonth, setIsMonth] = useState(true);
   const [page, setPage] = useState(1);
-  const [inputValue, setInputValue] = useState(null);
-  const [isAdd, setIsAdd] = useState(false);
-  const inputRef = useRef();
 
   const getData = async () => {
     const res = await axios.get("https://skrj0.sse.codesandbox.io/expend");
@@ -25,11 +20,11 @@ function BarExpendPage(props) {
   }, [page]);
 
   //switch to view months
-  const handleSwitchMonth = maxPage => {
+  const handleSwitchMonth = (maxPage) => {
     setPage(maxPage);
     setIsMonth(true);
   };
-  const handleSwitchDay = maxPage => {
+  const handleSwitchDay = (maxPage) => {
     setPage(maxPage);
     setIsMonth(false);
   };
@@ -38,17 +33,6 @@ function BarExpendPage(props) {
   };
   const handleNextClick = () => {
     setPage(page + 1);
-  };
-  const handleSubmitForm = e => {
-    e.preventDefault();
-    if (inputValue) {
-      const newTransaction = {
-        date: moment().format("MM/DD/YYYY"),
-        amount: inputValue
-      };
-      axios.post("https://skrj0.sse.codesandbox.io/income", newTransaction);
-      setInputValue("");
-    }
   };
 
   return (

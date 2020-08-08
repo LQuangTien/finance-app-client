@@ -30,11 +30,11 @@ function IncomePage(props) {
     }
   }, [isAdd]);
   //switch to view months
-  const handleSwitchMonth = maxPage => {
+  const handleSwitchMonth = (maxPage) => {
     setPage(maxPage);
     setIsMonth(true);
   };
-  const handleSwitchDay = maxPage => {
+  const handleSwitchDay = (maxPage) => {
     setPage(maxPage);
     setIsMonth(false);
   };
@@ -44,18 +44,18 @@ function IncomePage(props) {
   const handleNextClick = () => {
     setPage(page + 1);
   };
-  const handleSubmitForm = e => {
+  const handleSubmitForm = (e) => {
     e.preventDefault();
     if (inputValue) {
       const newTransaction = {
-        date: moment().format("MM/DD/YYYY"),
+        date: moment().format("DD/MM/YYYY"),
         amount: inputValue
       };
       axios.post("https://skrj0.sse.codesandbox.io/income", newTransaction);
       setInputValue("");
     }
   };
-  const handleInputOnChange = e => {
+  const handleInputOnChange = (e) => {
     setInputValue(+e.target.value);
   };
   const handleCreditClick = () => {

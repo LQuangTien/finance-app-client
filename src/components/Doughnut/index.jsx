@@ -3,6 +3,8 @@ import React from "react";
 import { Doughnut } from "react-chartjs-2";
 import moment from "moment";
 import { Button } from "antd";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { StyledButton, Month } from "./style";
 DoughnutChart.propTypes = {
   chartData: PropTypes.object,
   onPrev: PropTypes.func,
@@ -14,16 +16,7 @@ DoughnutChart.defaultProps = {
   onNext: null
 };
 
-const loadingData = {
-  datasets: [
-    {
-      data: [1, 1, 1, 1, 1, 1, 1],
-      backgroundColor: []
-    }
-  ],
-  labels: ["Nothing"]
-};
-const doughtnutColor = [
+const DOUGHNUT_COLORS = [
   "#9b5de5",
   "#fee440",
   "#f15bb5",
@@ -34,18 +27,31 @@ const doughtnutColor = [
 ];
 function DoughnutChart(props) {
   const { chartData, onPrev, onNext, page } = props;
+
+  const LOADING_DATA = {
+    datasets: [
+      {
+        data: [1, 1, 1, 1, 1, 1, 1],
+        backgroundColor: []
+      }
+    ],
+    labels: ["Nothing"]
+  };
+
+  // wait for load data
   if (!chartData) {
     return (
-      <>
+      <div>
         <Doughnut
-          data={loadingData}
+          data={LOADING_DATA}
           width={200}
           height={150}
           options={({ responsive: true }, { maintainAspectRatio: false })}
         />
-        <Button disabled>Loading</Button>
-        <Button disabled>Loading</Button>
-      </>
+
+        <StyledButton disabled icon={<LeftOutlined />} />
+        <StyledButton disabled icon={<RightOutlined />} />
+      </div>
     );
   }
 
@@ -61,29 +67,36 @@ function DoughnutChart(props) {
   };
 
   const { transactions } = chartData;
-  const filterTransaction = transactions.filter(transaction => {
-    const date = moment(transaction.date, "MM/DD/YYYY");
-
+  const filterTransaction = transactions.filter((transaction) => {
+    const date = moment(transaction.date, "DD/MM/YYYY");
     if (date.year() === moment().year()) {
       return date.month() + 1 === page;
+      // page is month
     }
   });
+
+  // if any month has no transaction
+  // return Doughtnut chart to loading
 
   if (!filterTransaction.length) {
     return (
       <div>
         <Doughnut
-          data={loadingData}
+          data={LOADING_DATA}
           width={200}
           height={150}
           options={({ responsive: true }, { maintainAspectRatio: false })}
         />
-        <Button onClick={handleOnPrevClick}>Prev</Button>
-        <Button onClick={handleOnNextClick}>Next</Button>
+        <Month>
+          {page}-{moment().year()}
+        </Month>
+        <StyledButton onClick={handleOnPrevClick} icon={<LeftOutlined />} />
+        <StyledButton onClick={handleOnNextClick} icon={<RightOutlined />} />
       </div>
     );
   }
 
+  // used for the doughnutData below
   const categories = filterTransaction.reduce(
     (accumulator, currentValue) => {
       const category = currentValue.category;
@@ -101,23 +114,22 @@ function DoughnutChart(props) {
     }
   );
 
-  const data = { data: [], labels: [] };
-  for (let category in categories) {
-    if (categories[category] > 0) {
-      data.data.push(categories[category]);
-      data.labels.push(category);
-    }
-  }
-  console.log(data);
+  // used for the doughnutData below
   const DoughnutData = {
     datasets: [
       {
-        data: data.data,
-        backgroundColor: doughtnutColor
+        data: [],
+        backgroundColor: DOUGHNUT_COLORS
       }
     ],
-    labels: data.labels
+    labels: []
   };
+  for (let category in categories) {
+    if (categories[category] > 0) {
+      DoughnutData.datasets[0].data.push(categories[category]);
+      DoughnutData.labels.push(category);
+    }
+  }
 
   return (
     <div>
@@ -127,16 +139,12 @@ function DoughnutChart(props) {
         height={150}
         options={({ responsive: true }, { maintainAspectRatio: false })}
       />
-      <Button onClick={handleOnPrevClick}>Prev</Button>
-      <Button onClick={handleOnNextClick}>Next</Button>
+      <Month>
+        {page}-{moment().year()}
+      </Month>
+      <StyledButton onClick={handleOnPrevClick} icon={<LeftOutlined />} />
+      <StyledButton onClick={handleOnNextClick} icon={<RightOutlined />} />
     </div>
   );
 }
 export default DoughnutChart;
-// Ultilities: Electricity, Gas, Phone, Internet, Water, Garbage
-// Food: Groceries, Restaurant, FastFood
-// Departmental: Clothing, Personal Item, Kids, Books
-// Entertaiment: Movies, Music
-// Car: petrol, Oil
-// Medical: Hospital, Pharmacy
-// Misc: Travel tickets, Hotel, Gift, Charity

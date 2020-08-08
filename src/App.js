@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { Layout } from "antd";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import NavbarMenu from "components/Common/Navbar";
 import IncomePage from "pages/IncomePage";
@@ -21,9 +21,10 @@ export default function App() {
             <Layout>
               <Content>
                 <Switch>
-                  <Route exact path="/" component={IncomePage} />
+                  <Route exact path="/income" component={IncomePage} />
                   <Route exact path="/expend" component={ExpendPage} />
 
+                  <Redirect from="/" to="/income" />
                   {/* <Route component={NotFound} /> */}
                 </Switch>
               </Content>

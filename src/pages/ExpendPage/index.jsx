@@ -1,7 +1,8 @@
 import React from "react";
+
 import BarExpendPage from "./BarExpendPage";
 import DoughnutPage from "./DoughnutPage";
-import { Row, Col } from "antd";
+import ExpendFormPage from "./ExpendFormPage";
 import { Page, PageWrapper } from "./style";
 function ExpendPage(props) {
   return (
@@ -11,9 +12,8 @@ function ExpendPage(props) {
       </Page>
       <Page>
         <DoughnutPage />
-        <DoughnutPage />
+        <ExpendFormPage />
       </Page>
-      {/* <Page /> */}
     </PageWrapper>
   );
 }

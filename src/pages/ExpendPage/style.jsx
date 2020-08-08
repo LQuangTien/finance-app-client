@@ -24,7 +24,8 @@ export const PageWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 `;
 export const Page = styled.div`
-  flex: 1 1 40px;
+  flex: 1 1;
 `;

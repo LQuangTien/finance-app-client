@@ -1,6 +1,6 @@
+import React from "react";
 import moment from "moment";
 import PropTypes from "prop-types";
-import React from "react";
 import { Bar } from "react-chartjs-2";
 import { PageButton, SwitchMode } from "./style";
 
@@ -46,7 +46,7 @@ function BarExpend(props) {
         <Bar
           data={data}
           width={100}
-          height={355}
+          height={395}
           options={({ responsive: true }, { maintainAspectRatio: false })}
         />
         <PageButton block type="prev" disabled>
@@ -75,7 +75,7 @@ function BarExpend(props) {
   if (isMonth) {
     // data for Chart if is Month
     const index = totalMoneyEachYear.findIndex(
-      x => x.year === moment().year() + 1 - page
+      (x) => x.year === moment().year() + 1 - page
     );
 
     data = {
@@ -144,23 +144,25 @@ function BarExpend(props) {
         className="chartBar"
         data={data}
         width={100}
-        height={355}
+        height={395}
         options={({ responsive: true }, { maintainAspectRatio: false })}
       />
 
       <div>
-        {// show this Next button when click Month
-        isMonth && (
-          <PageButton
-            block
-            type="prev"
-            disabled={page >= maxPageMonth}
-            onClick={page < maxPageMonth ? handleOnNext : null}
-            className="pagebutton buttonPrev"
-          >
-            {page < maxPageMonth ? "Prev" : "(Out of page)"}
-          </PageButton>
-        )}
+        {
+          // show this Next button when click Month
+          isMonth && (
+            <PageButton
+              block
+              type="prev"
+              disabled={page >= maxPageMonth}
+              onClick={page < maxPageMonth ? handleOnNext : null}
+              className="pagebutton buttonPrev"
+            >
+              {page < maxPageMonth ? "Prev" : "(Out of page)"}
+            </PageButton>
+          )
+        }
         {!isMonth && (
           <PageButton
             block
@@ -185,18 +187,20 @@ function BarExpend(props) {
           </PageButton>
         )}
 
-        {// show this Next button when click Day
-        !isMonth && (
-          <PageButton
-            block
-            type="next"
-            disabled={page >= maxPageDay}
-            onClick={page < maxPageDay ? handleOnNext : null}
-            className="pagebutton buttonNext"
-          >
-            {page < maxPageDay ? "Next" : "(Out of page)"}
-          </PageButton>
-        )}
+        {
+          // show this Next button when click Day
+          !isMonth && (
+            <PageButton
+              block
+              type="next"
+              disabled={page >= maxPageDay}
+              onClick={page < maxPageDay ? handleOnNext : null}
+              className="pagebutton buttonNext"
+            >
+              {page < maxPageDay ? "Next" : "(Out of page)"}
+            </PageButton>
+          )
+        }
       </div>
     </div>
   );

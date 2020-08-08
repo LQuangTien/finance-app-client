@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
+
 import Doughnut from "components/Doughnut";
 import { Wrapper } from "./style";
-function DoughtnutPage(props) {
+
+function DoughtnutPage() {
   const [chartData, setChartData] = useState(null);
   const [page, setPage] = useState(moment().month() + 1);
   const getData = async () => {
@@ -15,6 +17,7 @@ function DoughtnutPage(props) {
   useEffect(() => {
     getData();
   }, [page]);
+
   const handleOnPrev = () => {
     if (page > 1) {
       setPage(page - 1);
