@@ -7,7 +7,7 @@ History.propTypes = {};
 History.defaultProps = {};
 
 function History(props) {
-  const { history, isExpend } = props;
+  const { history, isSpending } = props;
   if (!history) {
     return (
       <Timeline>
@@ -19,14 +19,14 @@ function History(props) {
     );
   }
 
-  if (!isExpend) {
+  if (!isSpending) {
     return (
       <StyledTimeline reverse={true} mode="left">
-        {history.map((income) => (
-          <Timeline.Item label={income.date}>
+        {history.map((earning) => (
+          <Timeline.Item label={earning.date}>
             <Space direction="vertical">
               <Text strong>Amount: </Text>
-              {income.amount}
+              {earning.amount}
             </Space>
           </Timeline.Item>
         ))}
@@ -35,20 +35,20 @@ function History(props) {
   }
   return (
     <StyledTimeline reverse={true} mode="left">
-      {history.map((expend) => (
-        <Timeline.Item label={expend.date}>
+      {history.map((spending) => (
+        <Timeline.Item label={spending.date}>
           <Space direction="vertical">
             <p>
               <Text strong>Category: </Text>
-              {expend.category}
+              {spending.category}
             </p>
             <p>
               <Text strong>Type: </Text>
-              {expend.type}
+              {spending.type}
             </p>
             <p>
               <Text strong>Amount: </Text>
-              {expend.amount}
+              {spending.amount}
             </p>
           </Space>
         </Timeline.Item>

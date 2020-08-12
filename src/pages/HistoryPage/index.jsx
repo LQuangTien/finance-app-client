@@ -1,51 +1,47 @@
-import React, { useEffect, useState } from "react";
+import { Col, Row, Typography } from "antd";
 import axios from "axios";
-import moment from "moment";
-import { Wrapper } from "./style";
 import History from "components/History";
-import { Row, Col, Typography } from "antd";
+import { getData } from 'pages/configAxios'
+import React, { useEffect, useState } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
+import { Wrapper } from "./style";
 const { Title } = Typography;
 function HistoryPage() {
-  const [historyIncome, setHistoryIncome] = useState(null);
-  const [historyExpend, setHistoryExpend] = useState(null);
-  const getData = async (path) => {
-    const res = await axios.get(`https://skrj0.sse.codesandbox.io/${path}`);
+  const [historyEarning, setHistoryEarning] = useState(null);
+  const [historySpending, setHistorySpending] = useState(null);
 
-    if (path === "income") {
-      const { income } = res.data;
-      const { transactions } = income;
-      setHistoryIncome(transactions);
-    } else {
-      const { expend } = res.data;
-      const { transactions } = expend;
-      setHistoryExpend(transactions);
-    }
+  const getDataHistory = async () => {
+
+    const earning = await getData("earning");
+    setHistoryEarning(earning.transactions);
+
+    const spending = await getData("spending");
+    setHistorySpending(spending.transactions);
+
   };
 
   useEffect(() => {
-    getData("income");
-    getData("expend");
+    getDataHistory();
   }, []);
   return (
     <Row>
       <Col xs={24} sm={24} md={12} lg={12} xl={12}>
         <Wrapper>
           <Title level={2} style={{ color: "#00aaff" }}>
-            Income History
+            Earning History
           </Title>
           <Scrollbars>
-            <History history={historyIncome} isExpend={false} />
+            <History history={historyEarning} isSpending={false} />
           </Scrollbars>
         </Wrapper>
       </Col>
       <Col xs={24} sm={24} md={12} lg={12} xl={12}>
         <Wrapper>
           <Title level={2} style={{ color: "#ff6b6b" }}>
-            Expend History
+            Spending History
           </Title>
           <Scrollbars>
-            <History history={historyExpend} isExpend={true} />
+            <History history={historySpending} isSpending={true} />
           </Scrollbars>
         </Wrapper>
       </Col>

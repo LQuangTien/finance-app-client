@@ -3,8 +3,8 @@ import { Layout } from "antd";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import NavbarMenu from "components/Common/Navbar";
-import IncomePage from "pages/IncomePage";
-import ExpendPage from "pages/ExpendPage";
+import EarningPage from "pages/EarningPage";
+import SpendingPage from "pages/SpendingPage";
 import HistoryPage from "pages/HistoryPage";
 import LoginPage from "pages/LoginPage";
 
@@ -16,24 +16,27 @@ export default function App() {
     <div className="App">
       <Suspense fallback={<div>Loading...</div>}>
         <BrowserRouter>
-          <Layout>
-            <Sider breakpoint="md" collapsedWidth="0" theme="light">
-              <NavbarMenu />
-            </Sider>
+          <Switch>
+            <Route exact path="/login" component={LoginPage} />
             <Layout>
-              <Content>
-                <Switch>
-                  <Route exact path="/income" component={IncomePage} />
-                  <Route exact path="/expend" component={ExpendPage} />
-                  <Route exact path="/history" component={HistoryPage} />
-                  <Route exact path="/login" component={LoginPage} />
+              <Sider breakpoint="md" collapsedWidth="0" theme="light">
+                <NavbarMenu />
+              </Sider>
+              <Layout>
+                <Content>
 
-                  <Redirect from="/" to="/income" />
+                  <Route exact path="/earning" component={EarningPage} />
+                  <Route exact path="/spending" component={SpendingPage} />
+                  <Route exact path="/history" component={HistoryPage} />
+
+
+                  {/* <Redirect from="/" to="/earning" /> */}
                   {/* <Route component={NotFound} /> */}
-                </Switch>
-              </Content>
+
+                </Content>
+              </Layout>
             </Layout>
-          </Layout>
+          </Switch>
         </BrowserRouter>
       </Suspense>
     </div>
