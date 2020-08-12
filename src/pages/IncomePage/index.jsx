@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
 import moment from "moment";
 import { Button, Form, Input } from "antd";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import { getData } from "configAxios";
 
 import BarIncome from "components/BarIncome";
 import { CreditCard, MoneyForm, Wrapper } from "./style.jsx";
@@ -13,15 +15,17 @@ function IncomePage(props) {
   const [inputValue, setInputValue] = useState(null);
   const [isAdd, setIsAdd] = useState(false);
   const inputRef = useRef();
+  let history = useHistory();
 
-  const getData = async () => {
-    const res = await axios.get("https://skrj0.sse.codesandbox.io/income");
-    const { income } = res.data;
-    setChartData(income);
-  };
+  // const getData = async () => {
+  //   const res = await axios.get("https://skrj0.sse.codesandbox.io/income");
+  //   const { income } = res.data;
+  //   setChartData(income);
+  // };
 
   useEffect(() => {
-    getData();
+    const income = getData();
+    setChartData(income);
   }, [page]);
 
   useEffect(() => {

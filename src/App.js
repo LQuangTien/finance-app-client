@@ -4,8 +4,10 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import NavbarMenu from "components/Common/Navbar";
 import IncomePage from "pages/IncomePage";
-
 import ExpendPage from "pages/ExpendPage";
+import HistoryPage from "pages/HistoryPage";
+import LoginPage from "pages/LoginPage";
+
 import "./styles.css";
 
 const { Content, Sider } = Layout;
@@ -23,6 +25,8 @@ export default function App() {
                 <Switch>
                   <Route exact path="/income" component={IncomePage} />
                   <Route exact path="/expend" component={ExpendPage} />
+                  <Route exact path="/history" component={HistoryPage} />
+                  <Route exact path="/login" component={LoginPage} />
 
                   <Redirect from="/" to="/income" />
                   {/* <Route component={NotFound} /> */}

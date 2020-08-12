@@ -18,6 +18,15 @@ const LeftMenu = () => {
       <Menu.Item key="expend">
         <Link to="/expend">Expend</Link>
       </Menu.Item>
+      <Menu.Item key="history">
+        <Link to="/history">History</Link>
+      </Menu.Item>
+      <Menu.Item key="login">
+        <Link to="/login">Login</Link>
+      </Menu.Item>
+      <Menu.Item key="register">
+        <Link to="/register">Register</Link>
+      </Menu.Item>
     </NavMenu>
   );
 };

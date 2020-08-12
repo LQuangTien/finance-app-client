@@ -119,7 +119,7 @@ function ExpendForm(props) {
       </Form.Item>
 
       <Button type="primary" htmlType="submit" block>
-        Submit
+        Submit your reasonable spending
       </Button>
     </Form>
   );
