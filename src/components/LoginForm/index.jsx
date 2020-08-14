@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-
-import { Button, Form, Input } from "antd";
-
+import { Form, Input, Button } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom'
+import { StyledInput, StyledLink } from './style'
 ExpendForm.propTypes = {};
 ExpendForm.defaultProps = {};
 
@@ -21,28 +22,32 @@ function ExpendForm(props) {
     <Form
       onFinish={onFinish}
       form={form}
-      labelCol={{ span: 4 }}
-      wrapperCol={{ span: 20 }}
-      labelAlign="left"
     >
       <Form.Item
-        label="Username"
         name="name"
-        rules={[{ required: true, message: "Please input your username!" }]}
+        rules={[{ required: true, message: 'Please input your Username!' }]}
       >
-        <Input style={{ width: "100%" }} />
+        <StyledInput
+          prefix={<UserOutlined />}
+          placeholder="Username"
+        />
       </Form.Item>
       <Form.Item
-        label="Password"
         name="password"
-        rules={[{ required: true, message: "Please input your password!" }]}
+        rules={[{ required: true, message: 'Please input your Password!' }]}
       >
-        <Input.Password style={{ width: "100%" }} />
+        <StyledInput
+          prefix={<LockOutlined />}
+          type="password"
+          placeholder="Password"
+        />
       </Form.Item>
-
-      <Button type="primary" htmlType="submit" block>
-        Sign in & Let's spend reasonable
-      </Button>
+      <Form.Item>
+        <Button type="primary" htmlType="submit">
+          Sign In
+        </Button>
+        <StyledLink to="/register">Register</StyledLink>
+      </Form.Item>
     </Form>
   );
 }

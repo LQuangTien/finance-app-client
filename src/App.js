@@ -31,7 +31,7 @@ export default function App() {
 
 
                   {/* <Redirect from="/" to="/earning" /> */}
-                  {/* <Route component={NotFound} /> */}
+                  {/* <Route path="/" >Not found</Route> */}
 
                 </Content>
               </Layout>

@@ -15,9 +15,13 @@ export const getData = async (page) => {
   const data = res.data[page];
   return data;
 };
-export const postEarningData = newTransaction => {
-  axios.post("https://skrj0.sse.codesandbox.io/earning", newTransaction);
+export const postEarningData = async newTransaction => {
+  await axios.post(`https://skrj0.sse.codesandbox.io/earning`, newTransaction);
 }
-export const postSpendingData = value => {
-  axios.post("https://skrj0.sse.codesandbox.io/expend", value);
+export const postSpendingData = async value => {
+  await axios.post(`https://skrj0.sse.codesandbox.io/spending`, value);
 }
+export const postLogin = async (value) => {
+  return axios.post("https://skrj0.sse.codesandbox.io/auth/login", value);
+}
+

@@ -115,10 +115,10 @@ function SpendingForm(props) {
         name="date"
         rules={[{ required: true, message: "Please input your date!" }]}
       >
-        <DatePicker format={"MM/DD/YYYY"} style={{ width: "100%" }} />
+        <DatePicker format={"DD/MM/YYYY"} style={{ width: "100%" }} />
       </Form.Item>
 
-      <Button type="primary" htmlType="submit" block>
+      <Button type="primary" htmlType="submit" block style={{ background: "#52c41a", borderColor: "#52c41a" }}>
         Submit your reasonable spending
       </Button>
     </Form>
