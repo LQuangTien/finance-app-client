@@ -1,20 +1,9 @@
-import PropTypes from "prop-types";
 import React from "react";
+import PropTypes from "prop-types";
 import { Doughnut } from "react-chartjs-2";
 import moment from "moment";
-import { Button } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { StyledButton, Month } from "./style";
-DoughnutChart.propTypes = {
-  chartData: PropTypes.object,
-  onPrev: PropTypes.func,
-  onNext: PropTypes.func
-};
-DoughnutChart.defaultProps = {
-  chartData: null,
-  onPrev: null,
-  onNext: null
-};
 
 const DOUGHNUT_COLORS = [
   "#9b5de5",
@@ -73,6 +62,7 @@ function DoughnutChart(props) {
       return date.month() + 1 === page;
       // page is month
     }
+    return null;
   });
 
   // if any month has no transaction
@@ -88,7 +78,9 @@ function DoughnutChart(props) {
           options={({ responsive: true }, { maintainAspectRatio: false })}
         />
         <Month>
-          {page}-{moment().year()}
+          {page}
+          -
+          {moment().year()}
         </Month>
         <StyledButton onClick={handleOnPrevClick} icon={<LeftOutlined />} />
         <StyledButton onClick={handleOnNextClick} icon={<RightOutlined />} />
@@ -99,7 +91,7 @@ function DoughnutChart(props) {
   // used for the doughnutData below
   const categories = filterTransaction.reduce(
     (accumulator, currentValue) => {
-      const category = currentValue.category;
+      const { category } = currentValue;
       accumulator[category] += currentValue.amount;
       return accumulator;
     },
@@ -124,7 +116,7 @@ function DoughnutChart(props) {
     ],
     labels: []
   };
-  for (let category in categories) {
+  for (const category in categories) {
     if (categories[category] > 0) {
       DoughnutData.datasets[0].data.push(categories[category]);
       DoughnutData.labels.push(category);
@@ -140,11 +132,25 @@ function DoughnutChart(props) {
         options={({ responsive: true }, { maintainAspectRatio: false })}
       />
       <Month>
-        {page}-{moment().year()}
+        {page}
+        -
+        {moment().year()}
       </Month>
       <StyledButton onClick={handleOnPrevClick} icon={<LeftOutlined />} />
       <StyledButton onClick={handleOnNextClick} icon={<RightOutlined />} />
     </div>
   );
 }
+DoughnutChart.propTypes = {
+  chartData: PropTypes.shape(),
+  onPrev: PropTypes.func,
+  onNext: PropTypes.func,
+  page: PropTypes.number
+};
+DoughnutChart.defaultProps = {
+  chartData: null,
+  onPrev: null,
+  onNext: null,
+  page: null
+};
 export default DoughnutChart;

@@ -1,12 +1,12 @@
-import { Menu } from "antd";
 import React from "react";
-import { Link } from "react-router-dom";
-import { NavMenu, StyledButton } from "./style.jsx";
-import { useLocation, useHistory } from "react-router-dom";
 import axios from "axios";
+import { Menu } from "antd";
+import { Link, useLocation, useHistory } from "react-router-dom";
+import { NavMenu, StyledButton } from "./style";
+
 const NavbarMenu = () => {
   const location = useLocation();
-  const history = useHistory()
+  const history = useHistory();
   const currentPath = () => {
     const path = location.pathname.split("/");
     return path[1];
@@ -14,8 +14,8 @@ const NavbarMenu = () => {
   const onLogoutClick = () => {
     axios.defaults.headers.common["x-access-token"] = "";
     localStorage.removeItem("accessToken");
-    history.push('/login')
-  }
+    history.push("/login");
+  };
   const path = currentPath();
   return (
     <NavMenu theme="light" mode="inline" defaultSelectedKeys={[path]}>
@@ -28,7 +28,9 @@ const NavbarMenu = () => {
       <Menu.Item key="history">
         <Link to="/history">History</Link>
       </Menu.Item>
-      <StyledButton type="link" block danger onClick={onLogoutClick}>Logout</StyledButton>
+      <StyledButton type="link" block danger onClick={onLogoutClick}>
+        Logout
+      </StyledButton>
     </NavMenu>
   );
 };

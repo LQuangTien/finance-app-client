@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
+const Wrapper = styled.div`
   padding: 20px;
   margin: 18px;
   height: 94vh;
@@ -12,3 +12,4 @@ export const Wrapper = styled.div`
   box-shadow: 0 0 8px 5px #ddd;
   overflow-y: hidden;
 `;
+export default Wrapper;

@@ -1,23 +1,21 @@
 import { Col, Row, Typography } from "antd";
-import axios from "axios";
 import History from "components/History";
-import { getData } from 'pages/configAxios'
+import { getData } from "pages/configAxios";
 import React, { useEffect, useState } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
-import { Wrapper } from "./style";
+import Wrapper from "./style";
+
 const { Title } = Typography;
 function HistoryPage() {
   const [historyEarning, setHistoryEarning] = useState(null);
   const [historySpending, setHistorySpending] = useState(null);
 
   const getDataHistory = async () => {
-
     const earning = await getData("earning");
     setHistoryEarning(earning.transactions);
 
     const spending = await getData("spending");
     setHistorySpending(spending.transactions);
-
   };
 
   useEffect(() => {
@@ -41,7 +39,7 @@ function HistoryPage() {
             Spending History
           </Title>
           <Scrollbars>
-            <History history={historySpending} isSpending={true} />
+            <History history={historySpending} isSpending />
           </Scrollbars>
         </Wrapper>
       </Col>

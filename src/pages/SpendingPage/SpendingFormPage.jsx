@@ -1,8 +1,8 @@
 import SpendingForm from "components/SpendingForm";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import { postSpendingData } from "pages/configAxios";
 import { Wrapper } from "./style";
-import { postSpendingData } from 'pages/configAxios'
 
 const getTypes = (category) => {
   const CATEGORIES = {
@@ -22,8 +22,8 @@ function SpendingFormPage() {
   const [types, setTypes] = useState([]);
 
   useEffect(() => {
-    const types = getTypes(categoryInput);
-    setTypes(types);
+    const typeOptions = getTypes(categoryInput);
+    setTypes(typeOptions);
   }, [categoryInput]);
 
   const categoryOnChange = (value) => {
@@ -33,8 +33,9 @@ function SpendingFormPage() {
     setTypeInput(value);
   };
   const onFinishForm = (value) => {
-    value.date = moment(value.date).format("DD/MM/YYYY");
-    postSpendingData(value)
+    const cloneValue = value;
+    cloneValue.date = moment(value.date).format("DD/MM/YYYY");
+    postSpendingData(cloneValue);
   };
   return (
     <Wrapper>

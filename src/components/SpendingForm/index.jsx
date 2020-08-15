@@ -2,24 +2,9 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
 import { Button, DatePicker, Form, Input, Select } from "antd";
+
 const { Option } = Select;
 
-SpendingForm.propTypes = {
-  categoryInput: PropTypes.string,
-  typeInput: PropTypes.string,
-  types: PropTypes.array,
-  categoryOnChange: PropTypes.func,
-  typeOnChange: PropTypes.func,
-  onFinishForm: PropTypes.func
-};
-SpendingForm.defaultProps = {
-  categoryInput: "",
-  typeInput: "",
-  types: [],
-  categoryOnChange: null,
-  typeOnChange: null,
-  onFinishForm: null
-};
 const CATEGORIES = [
   "Ultilities",
   "Food",
@@ -60,9 +45,7 @@ function SpendingForm(props) {
   };
 
   useEffect(() => {
-    setFieldsValue({
-      type: types[0]
-    });
+    setFieldsValue({ type: types[0] });
   }, [types, categoryInput, setFieldsValue]);
 
   return (
@@ -115,7 +98,7 @@ function SpendingForm(props) {
         name="date"
         rules={[{ required: true, message: "Please input your date!" }]}
       >
-        <DatePicker format={"DD/MM/YYYY"} style={{ width: "100%" }} />
+        <DatePicker format="DD/MM/YYYY" style={{ width: "100%" }} />
       </Form.Item>
 
       <Button type="primary" htmlType="submit" block style={{ background: "#52c41a", borderColor: "#52c41a" }}>
@@ -124,5 +107,20 @@ function SpendingForm(props) {
     </Form>
   );
 }
-
+SpendingForm.propTypes = {
+  categoryInput: PropTypes.string,
+  typeInput: PropTypes.string,
+  types: PropTypes.shape([]),
+  categoryOnChange: PropTypes.func,
+  typeOnChange: PropTypes.func,
+  onFinishForm: PropTypes.func
+};
+SpendingForm.defaultProps = {
+  categoryInput: "",
+  typeInput: "",
+  types: [],
+  categoryOnChange: null,
+  typeOnChange: null,
+  onFinishForm: null
+};
 export default SpendingForm;

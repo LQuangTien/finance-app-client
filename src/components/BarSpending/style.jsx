@@ -1,14 +1,12 @@
+import styled from "styled-components";
 import { Button } from "antd";
 
-import styled from "styled-components";
-const colorButton = (background, borderColor = background, color = "white") => {
-  return `
+const colorButton = (background, borderColor = background, color = "white") => `
     background: ${background};
     border-color: ${borderColor};
     border-radius: 0;
     color: ${color};
   `;
-};
 export const SwitchMode = styled(Button)`
   ${colorButton("#00ccff")}
   font-weight: bold;
@@ -25,8 +23,8 @@ export const PageButton = styled(Button)`
   ${colorButton("white", "#28a745", "#28a745")}
   font-weight: bold;
   width: 50%;
-  border-right: ${props => props.type === "prev" && "none"};
-  border-left: ${props => props.type === "next" && "none"};
+  border-right: ${(props) => props.type === "prev" && "none"};
+  border-left: ${(props) => props.type === "next" && "none"};
   &:hover,
   &:focus {
     ${colorButton("white", "#28a745", "#28a745")}

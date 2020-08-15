@@ -1,13 +1,10 @@
-import React, { useEffect } from "react";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Form } from "antd";
+import React from "react";
 import PropTypes from "prop-types";
-import { Form, Input, Button } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom'
-import { StyledInput, StyledLink } from './style'
-ExpendForm.propTypes = {};
-ExpendForm.defaultProps = {};
+import { StyledInput, StyledLink } from "./style";
 
-function ExpendForm(props) {
+function LoginForm(props) {
   const { onFinishForm } = props;
   const [form] = Form.useForm();
 
@@ -25,7 +22,7 @@ function ExpendForm(props) {
     >
       <Form.Item
         name="name"
-        rules={[{ required: true, message: 'Please input your Username!' }]}
+        rules={[{ required: true, message: "Please input your Username!" }]}
       >
         <StyledInput
           prefix={<UserOutlined />}
@@ -34,7 +31,7 @@ function ExpendForm(props) {
       </Form.Item>
       <Form.Item
         name="password"
-        rules={[{ required: true, message: 'Please input your Password!' }]}
+        rules={[{ required: true, message: "Please input your Password!" }]}
       >
         <StyledInput
           prefix={<LockOutlined />}
@@ -51,5 +48,6 @@ function ExpendForm(props) {
     </Form>
   );
 }
-
-export default ExpendForm;
+LoginForm.propTypes = { onFinishForm: PropTypes.func };
+LoginForm.defaultProps = { onFinishForm: null };
+export default LoginForm;

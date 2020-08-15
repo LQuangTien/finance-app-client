@@ -4,8 +4,9 @@ import { Button, Form, Input } from "antd";
 import { getData, postEarningData } from "pages/configAxios";
 
 import BarEarning from "components/BarEarning";
-import { CreditCard, MoneyForm, Wrapper } from "./style.jsx";
-function EarningPage(props) {
+import { CreditCard, MoneyForm, Wrapper } from "./style";
+
+function EarningPage() {
   const [chartData, setChartData] = useState(null);
   const [isMonth, setIsMonth] = useState(true);
   const [page, setPage] = useState(1);
@@ -27,7 +28,7 @@ function EarningPage(props) {
       inputRef.current.focus();
     }
   }, [isAdd]);
-  //switch to view months
+  // switch to view months
   const handleSwitchMonth = (maxPage) => {
     setPage(maxPage);
     setIsMonth(true);

@@ -2,26 +2,8 @@ import React from "react";
 import moment from "moment";
 import PropTypes from "prop-types";
 import { Bar } from "react-chartjs-2";
-import { PageButton, SwitchMode } from "./style";
 
-BarSpending.propTypes = {
-  chartData: PropTypes.object,
-  isMonth: PropTypes.bool,
-  onPrev: PropTypes.func,
-  onNext: PropTypes.func,
-  onDay: PropTypes.func,
-  onMonth: PropTypes.func,
-  page: PropTypes.number
-};
-BarSpending.defaultProps = {
-  chartData: null,
-  isMonth: true,
-  onPrev: null,
-  onNext: null,
-  onDay: null,
-  onMonth: null,
-  page: 1
-};
+import { PageButton, SwitchMode } from "./style";
 
 // temp data use for Bar, wait for get data from sever
 let data = {
@@ -61,11 +43,11 @@ function BarSpending(props) {
 
   const { totalMoneyEachYear, transactions } = chartData;
 
-  //use for Month
+  // use for Month
   // handle NEXT button
   const maxPageMonth = totalMoneyEachYear.length;
 
-  //use for Day
+  // use for Day
   const perPage = 4;
   // handle NEXT button
   const maxPageDay = Math.ceil(transactions.length / perPage);
@@ -205,5 +187,22 @@ function BarSpending(props) {
     </div>
   );
 }
-
+BarSpending.propTypes = {
+  chartData: PropTypes.shape,
+  isMonth: PropTypes.bool,
+  onPrev: PropTypes.func,
+  onNext: PropTypes.func,
+  onDay: PropTypes.func,
+  onMonth: PropTypes.func,
+  page: PropTypes.number
+};
+BarSpending.defaultProps = {
+  chartData: null,
+  isMonth: true,
+  onPrev: null,
+  onNext: null,
+  onDay: null,
+  onMonth: null,
+  page: 1
+};
 export default BarSpending;

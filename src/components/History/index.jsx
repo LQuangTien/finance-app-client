@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import { Skeleton, Space, Timeline, Typography } from "antd";
+import React from "react";
 import PropTypes from "prop-types";
-import { Timeline, Skeleton, Typography, Space } from "antd";
-import { StyledTimeline } from "./style";
+import StyledTimeline from "./style";
+
 const { Text } = Typography;
-History.propTypes = {};
-History.defaultProps = {};
 
 function History(props) {
   const { history, isSpending } = props;
@@ -21,7 +20,7 @@ function History(props) {
 
   if (!isSpending) {
     return (
-      <StyledTimeline reverse={true} mode="left">
+      <StyledTimeline reverse mode="left">
         {history.map((earning) => (
           <Timeline.Item label={earning.date}>
             <Space direction="vertical">
@@ -34,7 +33,7 @@ function History(props) {
     );
   }
   return (
-    <StyledTimeline reverse={true} mode="left">
+    <StyledTimeline reverse mode="left">
       {history.map((spending) => (
         <Timeline.Item label={spending.date}>
           <Space direction="vertical">
@@ -56,5 +55,12 @@ function History(props) {
     </StyledTimeline>
   );
 }
-
+History.propTypes = {
+  history: PropTypes.shape([]),
+  isSpending: PropTypes.bool
+};
+History.defaultProps = {
+  history: null,
+  isSpending: null
+};
 export default History;

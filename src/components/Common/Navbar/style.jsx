@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { Menu, Button } from "antd";
 
 export const NavMenu = styled(Menu)`
@@ -13,6 +14,6 @@ export const StyledButton = styled(Button)`
   &:hover {
     transform: scale(1.05);
     font-weight: bold;
-    transition: all 0.5s; 
+    transition: all 0.5s;
   }
 `;

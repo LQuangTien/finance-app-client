@@ -1,10 +1,10 @@
 import React from "react";
-
 import BarSpendingPage from "./BarSpendingPage";
 import DoughnutPage from "./DoughnutPage";
 import SpendingormPage from "./SpendingFormPage";
 import { Page, PageWrapper } from "./style";
-function SpendingPage(props) {
+
+function SpendingPage() {
   return (
     <PageWrapper>
       <Page>

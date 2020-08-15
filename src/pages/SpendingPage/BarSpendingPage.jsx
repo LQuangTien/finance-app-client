@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 
 import BarSpending from "components/BarSpending";
-import { Wrapper } from "./style.jsx";
-import { getData } from 'pages/configAxios'
+import { getData } from "pages/configAxios";
+import { Wrapper } from "./style";
 
 function BarSpendingPage() {
   const [chartData, setChartData] = useState(null);
@@ -11,7 +10,7 @@ function BarSpendingPage() {
   const [page, setPage] = useState(1);
 
   const getSpendingData = async () => {
-    const spending = await getData("spending")
+    const spending = await getData("spending");
     setChartData(spending);
   };
 
@@ -19,7 +18,7 @@ function BarSpendingPage() {
     getSpendingData();
   }, [page]);
 
-  //switch to view months
+  // switch to view months
   const handleSwitchMonth = (maxPage) => {
     setPage(maxPage);
     setIsMonth(true);
