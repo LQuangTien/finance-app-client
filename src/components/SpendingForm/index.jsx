@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
-import { Button, DatePicker, Form, Input, Select } from "antd";
+import { Button, DatePicker, Form, Select, InputNumber } from "antd";
 
 const { Option } = Select;
 
@@ -67,7 +67,9 @@ function SpendingForm(props) {
           onChange={handleCategoryOnChange}
         >
           {CATEGORIES.map((category) => (
-            <Option value={category}>{category}</Option>
+            <Option value={category}>
+              {category}
+            </Option>
           ))}
         </Select>
       </Form.Item>
@@ -82,7 +84,11 @@ function SpendingForm(props) {
           onChange={handleTypeOnChange}
           value={typeInput}
         >
-          {types && types.map((type) => <Option value={type}>{type}</Option>)}
+          {types && types.map((type) => (
+            <Option value={type}>
+              {type}
+            </Option>
+          ))}
         </Select>
       </Form.Item>
 
@@ -91,7 +97,12 @@ function SpendingForm(props) {
         name="amount"
         rules={[{ required: true, message: "Please input your money!" }]}
       >
-        <Input style={{ width: "100%" }} />
+        {/* <Input style={{ width: "100%" }} /> */}
+        <InputNumber
+          formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+          parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+          style={{ width: "100%" }}
+        />
       </Form.Item>
       <Form.Item
         label="Date"

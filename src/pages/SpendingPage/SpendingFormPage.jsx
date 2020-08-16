@@ -1,6 +1,8 @@
 import SpendingForm from "components/SpendingForm";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+
 import { postSpendingData } from "pages/configAxios";
 import { Wrapper } from "./style";
 
@@ -16,11 +18,11 @@ const getTypes = (category) => {
   };
   return CATEGORIES[category];
 };
-function SpendingFormPage() {
+function SpendingFormPage(props) {
   const [categoryInput, setCategoryInput] = useState("");
   const [typeInput, setTypeInput] = useState("");
   const [types, setTypes] = useState([]);
-
+  const { onSubmitForm } = props;
   useEffect(() => {
     const typeOptions = getTypes(categoryInput);
     setTypes(typeOptions);
@@ -36,6 +38,9 @@ function SpendingFormPage() {
     const cloneValue = value;
     cloneValue.date = moment(value.date).format("DD/MM/YYYY");
     postSpendingData(cloneValue);
+    if (onSubmitForm) {
+      onSubmitForm(true);
+    }
   };
   return (
     <Wrapper>
@@ -50,5 +55,6 @@ function SpendingFormPage() {
     </Wrapper>
   );
 }
-
+SpendingFormPage.propTypes = { onSubmitForm: PropTypes.func };
+SpendingFormPage.defaultProps = { onSubmitForm: null };
 export default SpendingFormPage;

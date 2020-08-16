@@ -1,6 +1,6 @@
 import { Col, Space } from "antd";
 import RegisterForm from "components/RegisterForm";
-import { postLogin } from "pages/configAxios";
+import { postRegister } from "pages/configAxios";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { FormWrapper, StyledImg, StyledRow, StyledTitle, Wrapper } from "./style";
@@ -8,7 +8,8 @@ import { FormWrapper, StyledImg, StyledRow, StyledTitle, Wrapper } from "./style
 function RegisterPage() {
   const history = useHistory();
   const onFinishForm = async (value) => {
-    postLogin(value);
+    const res = await postRegister(value);
+    if (!res) return;
     history.push("/login");
   };
 

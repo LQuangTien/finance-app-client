@@ -1,27 +1,43 @@
 import React, { useEffect, useRef, useState } from "react";
 import moment from "moment";
-import { Button, Form, Input } from "antd";
-import { getData, postEarningData } from "pages/configAxios";
+import { Button, Form, InputNumber } from "antd";
+import { getData, postEarningData, getWallet } from "pages/configAxios";
 
 import BarEarning from "components/BarEarning";
-import { CreditCard, MoneyForm, Wrapper } from "./style";
+import { CreditCard, MoneyForm, Wrapper, Money, StyledText } from "./style";
 
 function EarningPage() {
   const [chartData, setChartData] = useState(null);
   const [isMonth, setIsMonth] = useState(true);
   const [page, setPage] = useState(1);
   const [isAdd, setIsAdd] = useState(false);
+  const [isSubmit, setSubmit] = useState(null);
+  const [wallet, setWallet] = useState(0);
+  const [isNegative, setNegative] = useState(false);
   const inputRef = useRef();
 
   const [form] = Form.useForm();
+  const formatMoneyStyle = (value) => `$${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-  const getEarningData = async () => {
-    const earning = await getData("earning");
-    setChartData(earning);
-  };
   useEffect(() => {
+    const getEarningData = async () => {
+      const earning = await getData("earning");
+      setChartData(earning);
+    };
+    const getCurrentWallet = async () => {
+      let currentWallet = await getWallet();
+      if (currentWallet < 0) {
+        setNegative(true);
+        currentWallet = -currentWallet;
+      }
+      const formatWallet = formatMoneyStyle(currentWallet);
+      setWallet(formatWallet);
+    };
+
     getEarningData();
-  }, [page]);
+    getCurrentWallet();
+    setSubmit(false);
+  }, [page, isSubmit]);
 
   useEffect(() => {
     if (isAdd) {
@@ -49,8 +65,9 @@ function EarningPage() {
         date: moment().format("DD/MM/YYYY"),
         amount: value.amount
       };
+      console.log(newTransaction);
       postEarningData(newTransaction);
-
+      setSubmit(true);
       form.resetFields();
     }
   };
@@ -58,7 +75,6 @@ function EarningPage() {
   const handleCreditClick = () => {
     setIsAdd(true);
   };
-
   return (
     <Wrapper>
       <MoneyForm form={form} layout="inline" onFinish={handleSubmitForm}>
@@ -74,16 +90,45 @@ function EarningPage() {
         {isAdd && (
           <>
             <Form.Item name="amount">
-              <Input ref={inputRef} size={40} />
+              <InputNumber
+                formatter={(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+                ref={inputRef}
+                style={{ width: "100%" }}
+              />
             </Form.Item>
             <Form.Item>
               <Button style={{ margin: "0 12px 0 0" }} htmlType="submit">
                 Submit
               </Button>
-              <Button onClick={() => setIsAdd(false)}>Close</Button>
+              <Button onClick={() => setIsAdd(false)}>
+                Close
+              </Button>
             </Form.Item>
           </>
         )}
+        <Money>
+          <StyledText>
+            My wallet:&nbsp;
+          </StyledText>
+          {!isNegative
+            && (
+            <StyledText
+              type="#55a630"
+            >
+              {wallet}
+            </StyledText>
+            )}
+          {isNegative && (
+          <StyledText
+            type="#e63946"
+          >
+            -
+            {wallet}
+          </StyledText>
+          )}
+
+        </Money>
       </MoneyForm>
       <BarEarning
         chartData={chartData}

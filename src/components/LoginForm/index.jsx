@@ -6,19 +6,16 @@ import { StyledInput, StyledLink } from "./style";
 
 function LoginForm(props) {
   const { onFinishForm } = props;
-  const [form] = Form.useForm();
 
   const onFinish = (value) => {
     if (onFinishForm) {
       onFinishForm(value);
-      form.resetFields();
     }
   };
 
   return (
     <Form
       onFinish={onFinish}
-      form={form}
     >
       <Form.Item
         name="name"

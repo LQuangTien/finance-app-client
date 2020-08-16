@@ -188,7 +188,7 @@ function BarSpending(props) {
   );
 }
 BarSpending.propTypes = {
-  chartData: PropTypes.shape,
+  chartData: PropTypes.shape(),
   isMonth: PropTypes.bool,
   onPrev: PropTypes.func,
   onNext: PropTypes.func,

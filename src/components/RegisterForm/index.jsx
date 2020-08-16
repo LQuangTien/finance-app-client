@@ -19,10 +19,6 @@ function RegisterForm(props) {
         label="Username"
         rules={[
           {
-            type: "text",
-            message: "The input is not valid Username!"
-          },
-          {
             required: true,
             message: "Please input your Username!"
           }

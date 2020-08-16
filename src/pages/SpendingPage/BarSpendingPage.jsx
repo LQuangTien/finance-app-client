@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-
+import PropTypes from "prop-types";
 import BarSpending from "components/BarSpending";
 import { getData } from "pages/configAxios";
 import { Wrapper } from "./style";
 
-function BarSpendingPage() {
+function BarSpendingPage(props) {
   const [chartData, setChartData] = useState(null);
   const [isMonth, setIsMonth] = useState(true);
   const [page, setPage] = useState(1);
-
+  const { isSubmit, onSubmitForm } = props;
   const getSpendingData = async () => {
     const spending = await getData("spending");
     setChartData(spending);
@@ -16,7 +16,8 @@ function BarSpendingPage() {
 
   useEffect(() => {
     getSpendingData();
-  }, [page]);
+    onSubmitForm(false);
+  }, [page, isSubmit, onSubmitForm]);
 
   // switch to view months
   const handleSwitchMonth = (maxPage) => {
@@ -48,5 +49,12 @@ function BarSpendingPage() {
     </Wrapper>
   );
 }
-
+BarSpendingPage.propTypes = {
+  onSubmitForm: PropTypes.func,
+  isSubmit: PropTypes.bool
+};
+BarSpendingPage.defaultProps = {
+  onSubmitForm: null,
+  isSubmit: null
+};
 export default BarSpendingPage;

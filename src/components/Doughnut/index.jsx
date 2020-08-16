@@ -37,7 +37,6 @@ function DoughnutChart(props) {
           height={150}
           options={({ responsive: true }, { maintainAspectRatio: false })}
         />
-
         <StyledButton disabled icon={<LeftOutlined />} />
         <StyledButton disabled icon={<RightOutlined />} />
       </div>

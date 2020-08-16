@@ -16,7 +16,12 @@ module.exports = {
     quotes: ["error", "double"],
     "comma-dangle": ["error", "never"],
     "object-curly-newline": ["error", { multiline: true }],
-    "no-restricted-syntax": ["error", "WithStatement",]
+    "no-restricted-syntax": ["error", "WithStatement",],
+    "no-console": ["error", { allow: ["log"] }],
+    "no-unused-expressions": ["error", { "allowShortCircuit": true }],
+    "react/jsx-one-expression-per-line": [2, { "allow": "none" }],
+    "no-param-reassign": 0,
+    "no-underscore-dangle": ["error", { "allow": ["_id"] }]
   },
   settings: {
     "import/resolver": {

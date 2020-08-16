@@ -22,10 +22,15 @@ function History(props) {
     return (
       <StyledTimeline reverse mode="left">
         {history.map((earning) => (
-          <Timeline.Item label={earning.date}>
+          <Timeline.Item label={earning.date} key={earning._id}>
             <Space direction="vertical">
-              <Text strong>Amount: </Text>
-              {earning.amount}
+              <Text strong>
+                Amount:
+              </Text>
+              <span>
+                $
+                {earning.amount}
+              </span>
             </Space>
           </Timeline.Item>
         ))}
@@ -35,18 +40,25 @@ function History(props) {
   return (
     <StyledTimeline reverse mode="left">
       {history.map((spending) => (
-        <Timeline.Item label={spending.date}>
+        <Timeline.Item label={spending.date} key={spending._id}>
           <Space direction="vertical">
             <p>
-              <Text strong>Category: </Text>
+              <Text strong>
+                Category:&nbsp;
+              </Text>
               {spending.category}
             </p>
             <p>
-              <Text strong>Type: </Text>
+              <Text strong>
+                Type:&nbsp;
+              </Text>
               {spending.type}
             </p>
             <p>
-              <Text strong>Amount: </Text>
+              <Text strong>
+                Amount:&nbsp;
+              </Text>
+              $
               {spending.amount}
             </p>
           </Space>
@@ -56,7 +68,7 @@ function History(props) {
   );
 }
 History.propTypes = {
-  history: PropTypes.shape([]),
+  history: PropTypes.arrayOf(PropTypes.shape({})),
   isSpending: PropTypes.bool
 };
 History.defaultProps = {

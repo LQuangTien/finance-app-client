@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
+import PropTypes from "prop-types";
 
 import Doughnut from "components/Doughnut";
 import { getData } from "pages/configAxios";
 import { Wrapper } from "./style";
 
-function DoughtnutPage() {
+function DoughtnutPage(props) {
   const [chartData, setChartData] = useState(null);
   const [page, setPage] = useState(moment().month() + 1);
+  const { isSubmit, onSubmitForm } = props;
+
   const getSpendingData = async () => {
     const spending = await getData("spending");
     setChartData(spending);
   };
-
   useEffect(() => {
     getSpendingData();
-  }, [page]);
+    onSubmitForm(false);
+  }, [page, isSubmit, onSubmitForm]);
 
   const handleOnPrev = () => {
     if (page > 1) {
@@ -38,5 +41,12 @@ function DoughtnutPage() {
     </Wrapper>
   );
 }
-
+DoughtnutPage.propTypes = {
+  onSubmitForm: PropTypes.func,
+  isSubmit: PropTypes.bool
+};
+DoughtnutPage.defaultProps = {
+  onSubmitForm: null,
+  isSubmit: null
+};
 export default DoughtnutPage;
