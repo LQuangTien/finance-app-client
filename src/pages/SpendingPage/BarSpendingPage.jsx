@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import BarSpending from "components/BarSpending";
-import { getData } from "pages/configAxios";
+import { getData } from "api/finance";
 import { Wrapper } from "./style";
 
 function BarSpendingPage(props) {

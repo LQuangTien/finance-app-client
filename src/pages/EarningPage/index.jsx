@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import moment from "moment";
 import { Button, Form, InputNumber } from "antd";
-import { getData, postEarningData, getWallet } from "pages/configAxios";
+import { getData, postEarningData, getWallet } from "api/finance";
 
 import BarEarning from "components/BarEarning";
 import { CreditCard, MoneyForm, Wrapper, Money, StyledText } from "./style";

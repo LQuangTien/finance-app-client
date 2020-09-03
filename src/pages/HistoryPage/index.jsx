@@ -1,6 +1,6 @@
 import { Col, Row, Typography } from "antd";
 import History from "components/History";
-import { getData } from "pages/configAxios";
+import { getData } from "api/finance";
 import React, { useEffect, useState } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import Wrapper from "./style";

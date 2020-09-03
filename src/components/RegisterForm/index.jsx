@@ -68,7 +68,9 @@ function RegisterForm(props) {
         <Button type="primary" htmlType="submit">
           Register
         </Button>
-        <StyledLink to="/login">Sign in</StyledLink>
+        <StyledLink to="/login">
+          Sign in
+        </StyledLink>
       </Form.Item>
     </Form>
   );

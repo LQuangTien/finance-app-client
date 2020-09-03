@@ -1,8 +1,8 @@
-import React, { Suspense } from "react";
 import { Layout } from "antd";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import NavbarMenu from "components/Common/Navbar";
-import { EarningPage, SpendingPage, HistoryPage, LoginPage, RegisterPage, NotFoundPage } from "pages";
+import { EarningPage, HistoryPage, LoginPage, RegisterPage, SpendingPage, TodoPage } from "pages";
+import React, { Suspense } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./styles.css";
 
 const { Content, Sider } = Layout;
@@ -30,12 +30,11 @@ export default function App() {
                   <Route exact path="/earning" component={EarningPage} />
                   <Route exact path="/spending" component={SpendingPage} />
                   <Route exact path="/history" component={HistoryPage} />
+                  <Route exact path="/todo" component={TodoPage} />
 
                 </Content>
 
               </Layout>
-              <Route path="/404" component={NotFoundPage} />
-              <Redirect to="/404" />
             </Layout>
 
           </Switch>

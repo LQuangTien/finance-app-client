@@ -2,8 +2,6 @@ import React from "react";
 import axios from "axios";
 import { Menu } from "antd";
 import { Link, useLocation, useHistory } from "react-router-dom";
-// import { getData } from "pages/configAxios";
-// import { getWallet } from "pages/configAxios";
 import { NavMenu, StyledButton, MenuItem } from "./style";
 
 const NavbarMenu = () => {
@@ -35,6 +33,11 @@ const NavbarMenu = () => {
       <Menu.Item key="history">
         <Link to="/history">
           History
+        </Link>
+      </Menu.Item>
+      <Menu.Item key="todo">
+        <Link to="/todo">
+          Todos
         </Link>
       </Menu.Item>
       <MenuItem>

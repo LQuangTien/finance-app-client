@@ -40,7 +40,9 @@ function LoginForm(props) {
         <Button type="primary" htmlType="submit">
           Sign In
         </Button>
-        <StyledLink to="/register">Register</StyledLink>
+        <StyledLink to="/register">
+          Register
+        </StyledLink>
       </Form.Item>
     </Form>
   );

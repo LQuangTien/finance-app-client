@@ -1,6 +1,6 @@
 import { Col, Space } from "antd";
 import RegisterForm from "components/RegisterForm";
-import { postRegister } from "pages/configAxios";
+import { postRegister } from "api/auth";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { FormWrapper, StyledImg, StyledRow, StyledTitle, Wrapper } from "./style";
@@ -19,9 +19,15 @@ function RegisterPage() {
       <Col xs={24} sm={24} md={8} lg={8} xl={8}>
         <Wrapper>
           <Space direction="vertical">
-            <StyledTitle type="left">Try your best</StyledTitle>
-            <StyledTitle type="center">to manage</StyledTitle>
-            <StyledTitle type="right">finances ...</StyledTitle>
+            <StyledTitle type="left">
+              Try your best
+            </StyledTitle>
+            <StyledTitle type="center">
+              to manage
+            </StyledTitle>
+            <StyledTitle type="right">
+              finances ...
+            </StyledTitle>
           </Space>
           <FormWrapper>
 

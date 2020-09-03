@@ -3,7 +3,7 @@ import moment from "moment";
 import PropTypes from "prop-types";
 
 import Doughnut from "components/Doughnut";
-import { getData } from "pages/configAxios";
+import { getData } from "api/finance";
 import { Wrapper } from "./style";
 
 function DoughtnutPage(props) {

@@ -3,7 +3,7 @@ import moment from "moment";
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-import { postSpendingData } from "pages/configAxios";
+import { postSpendingData } from "api/finance";
 import { Wrapper } from "./style";
 
 const getTypes = (category) => {

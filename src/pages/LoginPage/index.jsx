@@ -1,7 +1,7 @@
 import { Col, Space } from "antd";
 import axios from "axios";
 import LoginForm from "components/LoginForm";
-import { postLogin } from "pages/configAxios";
+import { postLogin } from "api/auth";
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { StyledImg, StyledRow, StyledTitle, Wrapper } from "./style";
