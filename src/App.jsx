@@ -4,6 +4,7 @@ import { EarningPage, HistoryPage, LoginPage, RegisterPage, SpendingPage, TodoPa
 import React, { Suspense } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./styles.css";
+import VocabularyTablePage from "pages/VocabularyTablePage";
 
 const { Content, Sider } = Layout;
 export default function App() {
@@ -31,6 +32,7 @@ export default function App() {
                   <Route exact path="/spending" component={SpendingPage} />
                   <Route exact path="/history" component={HistoryPage} />
                   <Route exact path="/todo" component={TodoPage} />
+                  <Route exact path="/vocabulary" component={VocabularyTablePage} />
 
                 </Content>
 

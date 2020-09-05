@@ -59,16 +59,16 @@ function TodoApp(props) {
     <FlexWrapper>
       <Wrapper>
         <Form onFinish={handleOnFinish} layout="inline" form={form}>
-          <Form.Item name="text" style={{ width: "90%" }}>
+          <Form.Item name="text" style={{ width: "80%" }}>
             <Input
               placeholder="Add todo"
+              required
             />
           </Form.Item>
           <Form.Item>
             <Button
               icon={isAdding && <Spin size="small" />}
               htmlType="submit"
-              type="primary"
             >
               Submit
             </Button>

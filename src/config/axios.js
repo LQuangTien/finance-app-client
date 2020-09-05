@@ -12,13 +12,14 @@ axios.interceptors.response.use(
     return res;
   },
   (error) => {
-    if (error.response.status === 401) {
+    const { status, data } = error.response;
+    if (status === 401) {
       axios.defaults.headers.common["x-access-token"] = "";
       localStorage.removeItem("accessToken");
       window.location.replace("/login");
     }
-    if (error.response.status === 403) {
-      notification.error({ message: error.response.data.message, placement: "topLeft" });
+    if (status === 403) {
+      notification.error({ message: data.error.message, placement: "topLeft" });
     }
   }
 );

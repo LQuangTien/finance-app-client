@@ -40,6 +40,11 @@ const NavbarMenu = () => {
           Todos
         </Link>
       </Menu.Item>
+      <Menu.Item key="vocabulary">
+        <Link to="/vocabulary">
+          Vocabulary
+        </Link>
+      </Menu.Item>
       <MenuItem>
         <StyledButton block danger onClick={onLogoutClick}>
           Logout
