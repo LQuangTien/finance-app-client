@@ -9,7 +9,7 @@ function TodoPage() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(GetTodo());
-  }, [dispatch, isAdding, isLoading]);
+  }, [dispatch, todos]);
   const onAddTodo = (text) => {
     dispatch(AddTodo(text));
   };
